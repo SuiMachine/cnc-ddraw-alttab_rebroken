@@ -3,6 +3,7 @@
 #include <math.h>
 #include "debug.h"
 #include "dd.h"
+#include "ddsurface.h"
 #include "ddraw.h"
 #include "hook.h"
 #include "config.h"
@@ -483,6 +484,36 @@ BOOL WINAPI fake_ShowWindow(HWND hWnd, int nCmdShow)
     }
 
     return real_ShowWindow(hWnd, nCmdShow);
+}
+
+HDC WINAPI fake_GetDC(HWND hWnd)
+{
+    if (g_ddraw && g_ddraw->primary && g_ddraw->hwnd == hWnd)
+    {
+        HDC dc;
+        dds_GetDC(g_ddraw->primary, &dc);
+
+        return dc;
+    }
+
+    return real_GetDC(hWnd);
+}
+
+int WINAPI fake_ReleaseDC(HWND hWnd, HDC hDC)
+{
+    if (g_ddraw && g_ddraw->primary && g_ddraw->hwnd == hWnd)
+    {
+        HDC primary_dc;
+        dds_GetDC(g_ddraw->primary, &primary_dc);
+
+        if (hDC == primary_dc)
+        {
+            dds_ReleaseDC(g_ddraw->primary, primary_dc);
+            return 1;
+        }
+    }
+
+    return real_ReleaseDC(hWnd, hDC);
 }
 
 HHOOK WINAPI fake_SetWindowsHookExA(int idHook, HOOKPROC lpfn, HINSTANCE hmod, DWORD dwThreadId)

@@ -803,7 +803,7 @@ HRESULT dd_SetCooperativeLevel(HWND hwnd, DWORD dwFlags)
 
         if (!g_ddraw->render.hdc)
         {
-            g_ddraw->render.hdc = GetDC(g_ddraw->hwnd);
+            g_ddraw->render.hdc = real_GetDC(g_ddraw->hwnd);
 
             memset(&pfd, 0, sizeof(PIXELFORMATDESCRIPTOR));
 
@@ -959,7 +959,7 @@ ULONG dd_Release()
 
         if (g_ddraw->render.hdc)
         {
-            ReleaseDC(g_ddraw->hwnd, g_ddraw->render.hdc);
+            real_ReleaseDC(g_ddraw->hwnd, g_ddraw->render.hdc);
             g_ddraw->render.hdc = NULL;
         }
 

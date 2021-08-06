@@ -1218,7 +1218,7 @@ HRESULT dds_Unlock(IDirectDrawSurfaceImpl* This, LPRECT lpRect)
                     color
                 );
 
-                ReleaseDC(hwnd, hdc);
+                real_ReleaseDC(hwnd, hdc);
             }
 
         } while ((hwnd = FindWindowEx(HWND_DESKTOP, hwnd, "SDlgDialog", NULL)));
@@ -1245,7 +1245,7 @@ HRESULT dds_Unlock(IDirectDrawSurfaceImpl* This, LPRECT lpRect)
         RECT rc;
         if (fake_GetWindowRect(hwnd, &rc))
         {
-            HDC hdc = GetDC(hwnd);
+            HDC hdc = real_GetDC(hwnd);
 
             GdiTransparentBlt(
                 hdc,
@@ -1261,7 +1261,7 @@ HRESULT dds_Unlock(IDirectDrawSurfaceImpl* This, LPRECT lpRect)
                 0
             );
 
-            ReleaseDC(hwnd, hdc);
+            real_ReleaseDC(hwnd, hdc);
         }
 
         BOOL x = g_ddraw->ticks_limiter.use_blt_or_flip;

@@ -39,6 +39,8 @@ CREATEWINDOWEXAPROC real_CreateWindowExA = CreateWindowExA;
 DESTROYWINDOWPROC real_DestroyWindow = DestroyWindow;
 MAPWINDOWPOINTSPROC real_MapWindowPoints = MapWindowPoints;
 SHOWWINDOWPROC real_ShowWindow = ShowWindow;
+GETDCPROC real_GetDC = GetDC;
+RELEASEDCPROC real_ReleaseDC = ReleaseDC;
 SETWINDOWSHOOKEXAPROC real_SetWindowsHookExA = SetWindowsHookExA;
 GETDEVICECAPSPROC real_GetDeviceCaps = GetDeviceCaps;
 LOADLIBRARYAPROC real_LoadLibraryA = LoadLibraryA;
@@ -75,6 +77,8 @@ static HOOKLIST g_hooks[] =
             { "DestroyWindow", (PROC)fake_DestroyWindow, (PROC*)&real_DestroyWindow, 0 },
             { "MapWindowPoints", (PROC)fake_MapWindowPoints, (PROC*)&real_MapWindowPoints, 0 },
             { "ShowWindow", (PROC)fake_ShowWindow, (PROC*)&real_ShowWindow, 0 },
+            { "GetDC", (PROC)fake_GetDC, (PROC*)&real_GetDC, SKIP_HOOK2 | SKIP_HOOK3 },
+            { "ReleaseDC", (PROC)fake_ReleaseDC, (PROC*)&real_ReleaseDC, SKIP_HOOK2 | SKIP_HOOK3 },
             { "", NULL, NULL, 0 }
         }
     },
