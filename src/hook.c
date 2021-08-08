@@ -43,6 +43,7 @@ GETDCPROC real_GetDC = GetDC;
 RELEASEDCPROC real_ReleaseDC = ReleaseDC;
 SETWINDOWSHOOKEXAPROC real_SetWindowsHookExA = SetWindowsHookExA;
 GETDEVICECAPSPROC real_GetDeviceCaps = GetDeviceCaps;
+SETDIBITSTODEVICEPROC real_SetDIBitsToDevice = SetDIBitsToDevice;
 LOADLIBRARYAPROC real_LoadLibraryA = LoadLibraryA;
 LOADLIBRARYWPROC real_LoadLibraryW = LoadLibraryW;
 LOADLIBRARYEXAPROC real_LoadLibraryExA = LoadLibraryExA;
@@ -86,6 +87,7 @@ static HOOKLIST g_hooks[] =
         "gdi32.dll",
         {
             { "GetDeviceCaps", (PROC)fake_GetDeviceCaps, (PROC*)&real_GetDeviceCaps, SKIP_HOOK3 },
+            { "SetDIBitsToDevice", (PROC)fake_SetDIBitsToDevice, (PROC*)&real_SetDIBitsToDevice, SKIP_HOOK2 | SKIP_HOOK3 },
             { "", NULL, NULL, 0 }
         }
     },

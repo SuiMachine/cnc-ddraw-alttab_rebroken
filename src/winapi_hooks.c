@@ -516,6 +516,37 @@ int WINAPI fake_ReleaseDC(HWND hWnd, HDC hDC)
     return real_ReleaseDC(hWnd, hDC);
 }
 
+int WINAPI fake_SetDIBitsToDevice(
+    HDC hdc,
+    int xDest,
+    int yDest,
+    DWORD w,
+    DWORD h,
+    int xSrc,
+    int ySrc,
+    UINT StartScan,
+    UINT cLines,
+    const VOID* lpvBits,
+    const BITMAPINFO* lpbmi,
+    UINT ColorUse)
+{
+    int result = real_SetDIBitsToDevice(hdc, xDest, yDest, w, h, xSrc, ySrc, StartScan, cLines, lpvBits, lpbmi, ColorUse);
+
+    if (g_ddraw && g_ddraw->primary)
+    {
+        HDC primary_dc;
+        dds_GetDC(g_ddraw->primary, &primary_dc);
+
+        if (hdc == primary_dc)
+        {
+            InterlockedExchange(&g_ddraw->render.surface_updated, TRUE);
+            ReleaseSemaphore(g_ddraw->render.sem, 1, NULL);
+        }
+    }
+
+    return result;
+}
+
 HHOOK WINAPI fake_SetWindowsHookExA(int idHook, HOOKPROC lpfn, HINSTANCE hmod, DWORD dwThreadId)
 {
     if (idHook == WH_KEYBOARD_LL && hmod && GetModuleHandle("AcGenral") == hmod)

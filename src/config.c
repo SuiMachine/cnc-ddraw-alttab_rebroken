@@ -425,7 +425,6 @@ static void cfg_create_ini()
             "\n"
             "; Casino Empire\n"
             "[CasinoEmpire]\n"
-            "minfps=-2\n"
             "hook=3\n"
             "passthrough=false\n"
             "\n"

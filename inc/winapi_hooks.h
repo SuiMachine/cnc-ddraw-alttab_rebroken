@@ -31,6 +31,8 @@ HDC WINAPI fake_GetDC(HWND hWnd);
 int WINAPI fake_ReleaseDC(HWND hWnd, HDC hDC);
 HHOOK WINAPI fake_SetWindowsHookExA(int idHook, HOOKPROC lpfn, HINSTANCE hmod, DWORD dwThreadId);
 int WINAPI fake_GetDeviceCaps(HDC hdc, int index);
+int WINAPI fake_SetDIBitsToDevice(
+    HDC, int, int, DWORD, DWORD, int, int, UINT, UINT, const VOID*, const BITMAPINFO*, UINT);
 HMODULE WINAPI fake_LoadLibraryA(LPCSTR lpLibFileName);
 HMODULE WINAPI fake_LoadLibraryW(LPCWSTR lpLibFileName);
 HMODULE WINAPI fake_LoadLibraryExA(LPCSTR lpLibFileName, HANDLE hFile, DWORD dwFlags);
