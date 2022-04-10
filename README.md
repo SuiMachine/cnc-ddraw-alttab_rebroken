@@ -1,4 +1,5 @@
-# cnc-ddraw
+# cnc-ddraw-alttab-rebroken
+This is a fork of cnc-ddraw. The purpose of this fork is to re-introduce "build anywhere glitch" of Red Alert 2 (1.0 and 1.0001) that is fixed due to better window handling in cncdraw. There rest is unchanged.
 cnc-ddraw can fix compatibility issues in older games, such as black screen, bad performance, crashes or defective Alt+Tab.
 
 &nbsp;
@@ -65,33 +66,7 @@ If you want to play in windowed mode then start the game once in fullscreen and 
 
 ### Supported Games
 
- - Command & Conquer Gold
- - Command & Conquer: Red Alert
- - Command & Conquer: Tiberian Sun
  - Command & Conquer: Red Alert 2
- - Carmageddon
- - Carmageddon 2
- - Warcraft 2
- - StarCraft
- - Diablo
- - Diablo 2
- - Age of Empires
- - Age of Empires II
- - Theme Hospital
- - Populous: The Beginning
- - Outlaws
- - Dungeon Keeper
- - Dark Reign: The Future of War
- - Star Wars: Galactic Battlegrounds
- - Atomic Bomberman
- - Dune 2000
- - Oddworld: Abe's Oddysee
- - Commandos
- - Red Baron 3D
- - F-16 Multirole Fighter
- - F-22 Raptor
- - Nox
- - ...
 
 There are a lot more games supported but I don't usually update the list, just give it a try and if it doesn't work then check the instructions above.
 
