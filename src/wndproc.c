@@ -551,23 +551,6 @@ LRESULT CALLBACK fake_WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam
             ip.ki.dwFlags = KEYEVENTF_KEYUP;
             SendInput(1, &ip, sizeof(ip));
         }
-
-        if (g_ddraw->windowed || g_ddraw->noactivateapp)
-        {
-            /* let it pass through once (tiberian sun) */
-            static BOOL one_time;
-
-            if (wParam && !one_time && g_ddraw->tshack)
-            {
-                one_time = TRUE;
-                break;
-            }
-            
-            if (wParam && g_ddraw->alt_key_down && !g_ddraw->releasealt)
-                PostMessageA(g_ddraw->hwnd, WM_SYSKEYUP, VK_MENU, 0);
-
-            return 0;
-        }
         break;
     }
     case WM_AUTORENDERER:
